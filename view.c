@@ -22,6 +22,7 @@ void on_command_entry_activate(GtkEntry *entry, gpointer user_data) {
         ShmBuf *shmp = buf_init();
         int history_count = 0;
 
+        
         // Girilen komutun çıktısını ilgili text buffer'a ekliyoruz
         execute_command(command, shmp, buffer);
 
