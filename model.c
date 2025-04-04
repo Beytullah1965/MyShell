@@ -90,7 +90,8 @@ void execute_command(const char *cmd, ShmBuf *shmp, GtkTextBuffer *text_buffer) 
         if (history_count < (BUF_SIZE / sizeof(ProcessInfo))) {
             process_history[history_count++] = pinfo;
         }
-
+      
+        
         // 🔽 Komut geçmişini GUI’ye yaz
         gtk_text_buffer_insert_at_cursor(text_buffer, "\n--- Komut Geçmişi ---\n", -1);
         for (int i = 0; i < history_count; i++) {
