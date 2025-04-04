@@ -11,7 +11,6 @@
 
 
 
-
 ### **Project Overview**  
 In this project, you will design a terminal-like application where multiple shell instances can execute commands *and* communicate with each other via a shared message buffer. Each shell instance (implemented using GTK for the GUI) will function as a standard shell (e.g., parsing commands like `ls`, `grep`, etc.) while also enabling users to send/receive messages through a shared pipe. The goal is to combine system programming concepts (processes, IPC, synchronization) with GUI development (GTK) and modular design (MVC architecture).
 

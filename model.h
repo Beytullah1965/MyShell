@@ -17,7 +17,6 @@ typedef struct {
     size_t cnt;
 } ShmBuf;
 
-
 typedef struct {
     pid_t pid;
     char command[MAX_COMMAND_LENGTH];

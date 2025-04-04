@@ -26,7 +26,6 @@ void on_command_entry_activate(GtkEntry *entry, gpointer user_data) {
         // Girilen komutun çıktısını ilgili text buffer'a ekliyoruz
         execute_command(command, shmp, buffer);
 
-
         // Komut uzunluğunu sınırlıyoruz ve çıktıyı snprintf ile yazdırıyoruz
         snprintf(output, sizeof(output), "Çalıştırılan komut: PID=%d, CMD=%.*s, Durum: %d\n", 
                  pinfo.pid, MAX_COMMAND_LEN, pinfo.command, pinfo.status);
