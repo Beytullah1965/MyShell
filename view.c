@@ -22,7 +22,7 @@ void on_command_entry_activate(GtkEntry *entry, gpointer user_data) {
         ShmBuf *shmp = buf_init();
         int history_count = 0;
 
-        
+
         // Girilen komutun çıktısını ilgili text buffer'a ekliyoruz
         execute_command(command, shmp, buffer);
 
@@ -34,6 +34,7 @@ void on_command_entry_activate(GtkEntry *entry, gpointer user_data) {
     }
     gtk_entry_set_text(entry, "");
 }
+
 
 // Mesaj gönderme işlemi (girişten shared memory'e yaz)
 void on_send_message(GtkButton *button, gpointer user_data) {

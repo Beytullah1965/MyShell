@@ -24,6 +24,7 @@ typedef struct {
     int status;
 } ProcessInfo;
 
+
 // Fonksiyon prototipleri
 ShmBuf *buf_init();
 void execute_command(const char *cmd, ShmBuf *shmp, GtkTextBuffer *text_buffer);

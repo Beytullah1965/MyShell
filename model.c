@@ -86,6 +86,7 @@ void execute_command(const char *cmd, ShmBuf *shmp, GtkTextBuffer *text_buffer) 
         }
         close(pipefd[0]);
 
+
         
         // 🔽 Geçmişe ekle
         if (history_count < (BUF_SIZE / sizeof(ProcessInfo))) {
