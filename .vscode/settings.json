@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "controller.h": "c",
+        "view.h": "c",
+        "stat.h": "c",
+        "cstdlib": "c",
+        "string.h": "c",
+        "model.h": "c",
+        "stdio.h": "c",
+        "types.h": "c",
+        "stddef.h": "c"
+    }
+}
