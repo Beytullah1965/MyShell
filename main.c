@@ -8,18 +8,19 @@
 int main(int argc, char *argv[]) {
     gtk_init(&argc, &argv);  // Parametresiz olarak çağrılır
 
-    static int terminal_counter = 0;
-    int terminal_id = ++terminal_counter;
-
     // Terminal penceresini oluştur
-    GtkWidget *window = create_terminal_window(terminal_id);
+    GtkWidget *window = create_terminal_window();
     gtk_widget_show_all(window);  // window'u göster
+
+    buf_init();  // Paylaşılan bellek başlatılır
 
     // Ana GTK olay döngüsünü başlat
     gtk_main();
-    
-    return 0;
 
+    // Program sonlandığında paylaşılan belleği temizle
+    shm_unlink("mymsgbuf");
+
+    return 0;
 }*/
 
 #include <gtk/gtk.h>

@@ -4,24 +4,28 @@
 #include <gtk/gtk.h>
 
 // Controller başlatma
-void init_controller(int termianl_id);
+void init_controller();
 
 // Komut işleme
-void handle_command(const char *input);
+void handle_command(const char *input, int sender_id);
 
 #endif
+
 */
 
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
 #include <gtk/gtk.h>
+#include "model.h"
+
+extern ShmBuf *shm;
 
 // Controller başlatma
-void init_controller();
+void init_controller(GtkTextBuffer *buffer);
 
 // Komut işleme
-void handle_command(const char *input);
+void handle_command(const char *input, int sender_id, GtkTextBuffer *text_buffer);
 
 #endif
 
