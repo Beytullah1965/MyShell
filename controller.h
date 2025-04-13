@@ -1,18 +1,3 @@
-/*#ifndef CONTROLLER_H
-#define CONTROLLER_H
-
-#include <gtk/gtk.h>
-
-// Controller başlatma
-void init_controller();
-
-// Komut işleme
-void handle_command(const char *input, int sender_id);
-
-#endif
-
-*/
-
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
@@ -22,11 +7,9 @@ void handle_command(const char *input, int sender_id);
 extern ShmBuf *shm;
 
 // Controller başlatma
-void init_controller(GtkTextBuffer *buffer);
+void init_controller(GtkTextBuffer *buffer, int terminal_id);
 
 // Komut işleme
 void handle_command(const char *input, int sender_id, GtkTextBuffer *text_buffer);
 
 #endif
-
-

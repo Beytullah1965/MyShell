@@ -1,28 +1,3 @@
-/*#include <gtk/gtk.h>
-#include <sys/mman.h>
-#include <semaphore.h>
-#include "model.h"
-#include "controller.h"
-#include "view.h"
-
-int main(int argc, char *argv[]) {
-    gtk_init(&argc, &argv);  // Parametresiz olarak çağrılır
-
-    // Terminal penceresini oluştur
-    GtkWidget *window = create_terminal_window();
-    gtk_widget_show_all(window);  // window'u göster
-
-    buf_init();  // Paylaşılan bellek başlatılır
-
-    // Ana GTK olay döngüsünü başlat
-    gtk_main();
-
-    // Program sonlandığında paylaşılan belleği temizle
-    shm_unlink("mymsgbuf");
-
-    return 0;
-}*/
-
 #include <gtk/gtk.h>
 #include <sys/mman.h>
 #include <semaphore.h>
@@ -31,18 +6,19 @@ int main(int argc, char *argv[]) {
 #include "view.h"
 
 int main(int argc, char *argv[]) {
-    gtk_init(&argc, &argv);  // Parametresiz olarak çağrılır
+    gtk_init(&argc, &argv);  // GTK başlat
 
-    // Terminal penceresini oluştur
+    // Paylaşılan bellek başlat
+    buf_init();
+
+    // İlk terminal penceresini oluştur
     GtkWidget *window = create_terminal_window();
-    gtk_widget_show_all(window);  // window'u göster
+    gtk_widget_show_all(window);
 
-    buf_init();  // Paylaşılan bellek başlatılır
-
-    // Ana GTK olay döngüsünü başlat
+    // GTK olay döngüsünü başlat
     gtk_main();
 
-    // Program sonlandığında paylaşılan belleği temizle
+    // Uygulama sonlandığında paylaşılan belleği temizle
     shm_unlink("mymsgbuf");
 
     return 0;

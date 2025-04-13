@@ -8,6 +8,7 @@
         "model.h": "c",
         "stdio.h": "c",
         "types.h": "c",
-        "stddef.h": "c"
+        "stddef.h": "c",
+        "stdlib.h": "c"
     }
 }
