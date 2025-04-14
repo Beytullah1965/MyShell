@@ -70,17 +70,15 @@ The project uses the following tools and libraries:
 
 ## **File Structure**
 
-
-.
-├── README.md               # Project documentation
-├── Makefile                # Build file
-├── main.c                  # Application entry point
-├── model.c                 # Shared memory and semaphore operations
-├── model.h                 # Header file for the model
-├── controller.c            # Logic for processing commands
-├── view.c                  # GUI and terminal window creation
-├── view.h                  # View header file
-└── terminal_icon.png       # Terminal window icon  
+    README.md               # Project documentation
+    Makefile                # Build file
+    main.c                  # Application entry point
+    model.c                 # Shared memory and semaphore operations
+    model.h                 # Header file for the model
+    controller.c            # Logic for processing commands
+    view.c                  # GUI and terminal window creation
+    view.h                  # View header file
+    terminal_icon.png       # Terminal window icon  
 
 ## **Synchronization**
 
@@ -153,5 +151,4 @@ The following individuals contributed to this project:
 - **Abdülhalık Enes BAKKAL** (22120205008)
 - **Melih TURGUT** (23120205006)
 - **Salih KARABULAK** (23120205050)
-
 ```bash
