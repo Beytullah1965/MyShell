@@ -37,12 +37,17 @@ static gboolean poll_messages(gpointer user_data) {
 void init_controller(GtkTextBuffer *buffer, int terminal_id) {
     shm = buf_init();
 
+    sem_wait(&shm->sem);
+    shm->terminal_active[terminal_id] = 1;  // Terminal aktif hale getirildi
+    sem_post(&shm->sem);
+
     TerminalData *tdata = g_malloc(sizeof(TerminalData));
     tdata->buffer = buffer;
     tdata->terminal_id = terminal_id;
 
     g_timeout_add(MESSAGE_POLL_INTERVAL, poll_messages, tdata);
 }
+
 
 void handle_command(const char *input, int sender_id, GtkTextBuffer *text_buffer) {
     if (input == NULL || strlen(input) == 0) return;
@@ -83,25 +88,34 @@ void handle_command(const char *input, int sender_id, GtkTextBuffer *text_buffer
 
         if (target_id != -1 && strlen(msg_start) > 0) {
             sem_wait(&shm->sem);
-            strncpy(shm->msgbuf, msg_start, MSG_BUF_SIZE - 1);
-            shm->msgbuf[MSG_BUF_SIZE - 1] = '\0';
-            shm->cnt = strlen(shm->msgbuf);
-            shm->receiver_id = target_id;  // Hedef terminalin ID'si
-            sem_post(&shm->sem);
-
-            // Mesaj gönderildiğine dair bir bilgi eklemek
-            GtkTextIter iter;
-            gtk_text_buffer_get_end_iter(text_buffer, &iter);
-            char info_msg[256];
-            snprintf(info_msg, sizeof(info_msg), "Message sent to Terminal %d\n", target_id);
-            gtk_text_buffer_insert(text_buffer, &iter, info_msg, -1);
-        }
-        else {
-            // Geçersiz mesaj durumu
+        
+            if (target_id < 0 || target_id >= MAX_TERMINAL || shm->terminal_active[target_id] == 0) {
+                sem_post(&shm->sem);
+        
+                GtkTextIter iter;
+                gtk_text_buffer_get_end_iter(text_buffer, &iter);
+                char err_msg[128];
+                snprintf(err_msg, sizeof(err_msg), "Error: Terminal %d is not active.\n", target_id);
+                gtk_text_buffer_insert(text_buffer, &iter, err_msg, -1);
+            } else {
+                strncpy(shm->msgbuf, msg_start, MSG_BUF_SIZE - 1);
+                shm->msgbuf[MSG_BUF_SIZE - 1] = '\0';
+                shm->cnt = strlen(shm->msgbuf);
+                shm->receiver_id = target_id;
+                sem_post(&shm->sem);
+        
+                GtkTextIter iter;
+                gtk_text_buffer_get_end_iter(text_buffer, &iter);
+                char info_msg[256];
+                snprintf(info_msg, sizeof(info_msg), "Message sent to Terminal %d\n", target_id);
+                gtk_text_buffer_insert(text_buffer, &iter, info_msg, -1);
+            }
+        } else {
             GtkTextIter iter;
             gtk_text_buffer_get_end_iter(text_buffer, &iter);
             gtk_text_buffer_insert(text_buffer, &iter, "Invalid message format.\n", -1);
         }
+        
     }
     else if (strcmp(input, "history") == 0) {
         sem_wait(&shm->sem);

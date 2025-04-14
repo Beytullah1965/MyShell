@@ -6,10 +6,10 @@
 #include <sys/types.h>
 #include <stddef.h>
 
-// Paylaşılan bellek yapısı
 #define MSG_BUF_SIZE 1024
 #define MAX_COMMAND_LENGTH 512
-#define MAX_HISTORY 100  // Yeni eklenen sabit
+#define MAX_HISTORY 100
+#define MAX_TERMINAL 10  // Eklendi
 
 typedef struct {
     pid_t pid;
@@ -18,20 +18,20 @@ typedef struct {
 } ProcessInfo;
 
 typedef struct {
-    char msgbuf[MSG_BUF_SIZE];   // Mesaj içeriği
-    int sender_id;               // Gönderen terminalin kimliği
-    int receiver_id;             // Alıcı terminalin kimliği
-    int cnt;                     // Mesaj uzunluğu
-    sem_t sem;                   // Semaphore
-    
-    // Yeni eklenen alanlar
-    ProcessInfo history[MAX_HISTORY];  // Komut geçmişi
-    int history_count;                 // Geçmişteki komut sayısı
+    char msgbuf[MSG_BUF_SIZE];
+    int sender_id;
+    int receiver_id;
+    int cnt;
+    sem_t sem;
+
+    // Eklenenler
+    int terminal_active[MAX_TERMINAL];  // Her terminal için aktiflik durumu
+    ProcessInfo history[MAX_HISTORY];
+    int history_count;
 } ShmBuf;
 
 extern ShmBuf *shm;
 
-// Fonksiyon prototipleri
 ShmBuf *buf_init();
 char* model_read_messages(int terminal_id);
 void send_message(ShmBuf *shmp, const char *msg, int sender_id, int receiver_id);
@@ -41,3 +41,4 @@ ProcessInfo *get_process_history();
 int get_history_count();
 
 #endif // MODEL_H
+
