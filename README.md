@@ -70,7 +70,7 @@ The project uses the following tools and libraries:
 
 ## **File Structure**
 
-```bash
+
 .
 ├── README.md               # Project documentation
 ├── Makefile                # Build file
@@ -82,37 +82,54 @@ The project uses the following tools and libraries:
 ├── view.h                  # View header file
 └── terminal_icon.png       # Terminal window icon  
 
-## Synchronization
+## **Synchronization**
+
 The application ensures synchronization between terminal windows while allowing each terminal to operate independently by using shared memory (shm) and semaphores. Semaphores ensure that only one terminal can access the shared memory at a time.
 
-## Command Execution
+---
+
+## **Command Execution**
+
 When users enter a command in the terminal window, the command is stored in shared memory and becomes valid for other terminal windows as well. The command is then processed, and its output is displayed in the terminal window.
 
-## GUI Customization
+---
+
+## **GUI Customization**
+
 The application is developed using GTK 3.x, and the appearance of the terminal windows can be customized using CSS. Users can change the background color, font, and other styling properties.
 
-## Design Choices and Challenges
+---
+
+## **Design Choices and Challenges**
 
 ### Model-View-Controller (MVC) Design Pattern
-The design of the application follows the MVC (Model-View-Controller) pattern. This design ensures that the code remains organized and sustainable.
+
+The design of the application follows the MVC (Model-View-Controller) pattern to ensure the code remains organized and sustainable.
 
 - **Model:** Manages data such as shared memory and semaphores.
 - **View:** Creates the user interface and communicates commands and messages to the user.
 - **Controller:** Handles user interactions and controls the behavior of terminal windows based on data from the model.
 
 ### Challenges:
+
 - Multiple terminal windows accessing shared memory simultaneously could lead to race conditions. Semaphores ensure that only one terminal can access the data at a time.
 - Developing a GUI with GTK for terminal window-based applications can be complex.
 - Proper management is required for command history and messaging systems.
 
-## Performance Optimization
+---
+
+## **Performance Optimization**
+
 Performance is critical, especially when multiple terminal windows are running. The following methods are used to optimize the application's performance:
 
 - **Shared Memory Usage:** Speeds up data sharing between terminal windows and eliminates unnecessary I/O operations.
 - **Semaphore Management:** Ensures that each terminal window accesses shared memory only when necessary.
 - **Resource Cleanup:** Resource management is regularly monitored.
 
-## User Experience (UX) Improvements
+---
+
+## **User Experience (UX) Improvements**
+
 User experience is essential for the application to be efficient and intuitive. UX improvements include:
 
 - **Responsive Interface:** Terminal windows are resizable and customizable based on user needs.
@@ -120,13 +137,16 @@ User experience is essential for the application to be efficient and intuitive. 
 - **Intuitive Command Input:** The PowerShell-like command structure makes it easy for users to quickly adapt.
 - **Customization Options:** The visual appearance of the terminal windows can be customized using CSS.
 
+---
 
+## **Conclusion**
 
-## Conclusion
 This project has enabled the development of an advanced multi-terminal application using shared memory and semaphores. Design choices, particularly the MVC pattern and resource management, have ensured that the application remains efficient and sustainable. The project has provided valuable insights into system programming and GUI development.
 
+---
 
-## Contributors
+## **Contributors**
+
 The following individuals contributed to this project:
 
 - **Beytullah AYDIN** (23120205037)
@@ -134,5 +154,4 @@ The following individuals contributed to this project:
 - **Melih TURGUT** (23120205006)
 - **Salih KARABULAK** (23120205050)
 
-
-
+```bash
