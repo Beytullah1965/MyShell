@@ -210,7 +210,7 @@ void on_add_terminal_button_clicked(GtkButton *button, gpointer user_data) {
     terminal_counter++;
 }
 void set_window_icon(GtkWidget *window) {
-    const gchar *icon_path = "/mnt/c/Users/beytu/Downloads/shellicon.png";
+    const gchar *icon_path = "resources/icons/icon.png";
     
     // PNG dosyasını yükle
     GError *error = NULL;
